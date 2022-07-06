@@ -14,6 +14,30 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Check command line parameters
+if [[ $# < 2 ]]; then
+  echo 'USAGE:  ./install.sh PROJECT_ID SQL_PASSWORD [DEPLOYMENT_NAME=mlops] [REGION=us-central1] [ZONE=us-central1-a]'
+  echo 'PROJECT_ID      - GCP project Id'
+  echo 'SQL_PASSWORD    - Password to connect database'
+  echo 'DEPLOYMENT_NAME - Short name prefix of infrastructure element and folder names, like SQL instance, Cloud Composer name'
+  echo 'REGION          - A GCP region across the globe. Best to select one of the nearest where Cloud AI Platform available.'
+  echo 'ZONE            - A zone is an isolated location within a region. Available Regions and Zones: https://cloud.google.com/compute/docs/regions-zones'
+  exit 1
+fi
+
+# Set project and default constants
+export PROJECT_ID=${1}
+export SQL_PASSWORD=${2}
+export DEPLOYMENT_NAME=${3:-mlops}
+export REGION=${4:-us-central1}
+export ZONE=${5:-us-central1-a}
+# export USE_GKE_GCLOUD_AUTH_PLUGIN=True
+# gcloud components install gke-gcloud-auth-plugin
+
+export SQL_USERNAME="root"
+# Set calculated infrastucture and folder names
+export GCS_BUCKET_NAME="gs://$DEPLOYMENT_NAME-artifacts"
+export ML_IMAGE_URI="gcr.io/$PROJECT_ID/$DEPLOYMENT_NAME-mlimage:latest"
 
 # Set up a global error handler
 err_handler() {
@@ -125,7 +149,7 @@ if [[ $(gcloud composer environments list --locations=$REGION --filter="$COMPOSE
     --zone=$ZONE \
     --airflow-configs=core-dags_are_paused_at_creation=True \
     --disk-size=50GB \
-    --image-version=composer-1.13.4-airflow-1.10.12 \
+    --image-version=composer-1.19.2-airflow-2.2.5 \
     --machine-type=n1-standard-2 \
     --node-count=3 \
     --python-version=3 \
@@ -150,6 +174,8 @@ echo "Setting configuration to connect to Composer GKE cluster..."
 # 'goog-composer-environment' label is set to $COMPOSER_NAME
 GKE_CLUSTER=$(gcloud container clusters list --limit=1 --zone=$ZONE --filter="resourceLabels.goog-composer-environment=$COMPOSER_NAME" --format="value(name)")
 gcloud container clusters get-credentials $GKE_CLUSTER --zone $ZONE --project $PROJECT_ID
+echo "GKE Cluster is: $GKE_CLUSTER"
+echo
 
 # Create service account
 SA_EMAIL=sql-proxy-access@$PROJECT_ID.iam.gserviceaccount.com
@@ -185,7 +211,8 @@ echo "MLflow UI proxy container image is built: ${MLFLOW_PROXY_URI}:latest"
 
 # Initializing Helm's tiller
 echo "Initializing Helm environment..."
-kubectl create serviceaccount --namespace kube-system tiller
+# kubectl create serviceaccount --namespace kube-system tiller
+kubectl --namespace kube-system create serviceaccount tiller
 kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:tiller
 
 # Using fix K8s namespace: 'mlflow' for MLflow
@@ -207,7 +234,7 @@ helm install mlflow --namespace mlflow \
 mlflow-helm
 
 # Generate command for debug:
-#echo helm template mlflow --namespace mlflow --set images.mlflow=$MLFLOW_IMAGE_URI --set images.proxyagent=$MLFLOW_PROXY_URI --set defaultArtifactRoot=$GCS_BUCKET_NAME/experiments --set backendStore.mysql.host="127.0.0.1" --set backendStore.mysql.port="3306" --set backendStore.mysql.database="mlflow" --set backendStore.mysql.user=$SQL_USERNAME --set backendStore.mysql.password=$SQL_PASSWORD --set cloudSqlConnection.name=$MLFLOW_SQL_CONNECTION_NAME --output-dir './yamls' mlflow-helm
+echo helm template mlflow --namespace mlflow --set images.mlflow=$MLFLOW_IMAGE_URI --set images.proxyagent=$MLFLOW_PROXY_URI --set defaultArtifactRoot=$GCS_BUCKET_NAME/experiments --set backendStore.mysql.host="127.0.0.1" --set backendStore.mysql.port="3306" --set backendStore.mysql.database="mlflow" --set backendStore.mysql.user=$SQL_USERNAME --set backendStore.mysql.password=$SQL_PASSWORD --set cloudSqlConnection.name=$MLFLOW_SQL_CONNECTION_NAME --output-dir './yamls' mlflow-helm
 
 MLFLOW_SQL_CONNECTION_STR="mysql+pymysql://$SQL_USERNAME:$SQL_PASSWORD@127.0.0.1:3306/mlflow"
 
@@ -217,13 +244,19 @@ echo "Waiting for MLflow Tracking server provisioned"
 MLFLOW_TRACKING_EXTERNAL_URI="https://"
 # Internal access from Composer to Mlflow
 MLFLOW_URI_FOR_COMPOSER=="http://"
+echo "wait 5 seconds..."
+sleep 5s
 while [ "$MLFLOW_TRACKING_EXTERNAL_URI" == "https://" ] || [ "$MLFLOW_URI_FOR_COMPOSER" == "http://" ]
 do
-  echo "wait 5 seconds..."
-  sleep 5s
   MLFLOW_TRACKING_EXTERNAL_URI="https://"$(kubectl describe configmap inverse-proxy-config -n mlflow | grep "googleusercontent.com")
   MLFLOW_URI_FOR_COMPOSER="http://"$(kubectl get svc -n mlflow mlflow -o jsonpath='{.spec.clusterIP}{":"}{.spec.ports[0].port}')
 done
+
+echo "MLflow External URL:"
+echo $MLFLOW_TRACKING_EXTERNAL_URI
+
+echo "MLflow Composer URL:"
+echo $MLFLOW_URI_FOR_COMPOSER
 
 echo "MLflow Tracking server provisioned"
 echo
@@ -243,7 +276,7 @@ export MLOPS_REGION=${REGION}
 export ML_IMAGE_URI=${ML_IMAGE_URI}
 
 /usr/local/bin/cloud_sql_proxy -dir=/var/run/cloud-sql-proxy -instances=${MLFLOW_SQL_CONNECTION_NAME}=tcp:3306 -credential_file=/usr/local/bin/sql-access.json &
-sleep 5s
+sleep 45s
 mlflow server --host=127.0.0.1 --port=80 --backend-store-uri=${MLFLOW_SQL_CONNECTION_STR} --default-artifact-root=${GCS_BUCKET_NAME}/experiments &
 EOF
 
