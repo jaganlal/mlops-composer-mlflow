@@ -1,7 +1,17 @@
 # My Usage
 
+./set-env-vars.sh mlops-poc-337511 mlflow_db_secret mlops-july-07-3pm us-east1 us-east1-b
+./install.sh mlops-poc-337511 mlflow_db_secret mlops-july-07-3pm us-east1 us-east1-b
+   https://cc8fb569cd450d0-dot-us-east1.pipelines.googleusercontent.com
+./destroy.sh mlops-poc-337511 mlops-july-07-3pm us-east1 us-east1-b
+
+./set-env-vars.sh mlops-poc-337511 mlflow_db_secret mlops-july-07-1pm us-east1 us-east1-b
+./install.sh mlops-poc-337511 mlflow_db_secret mlops-july-07-1pm us-east1 us-east1-b
+./destroy.sh mlops-poc-337511 mlops-july-07-1pm us-east1 us-east1-b
+
 ./set-env-vars.sh mlops-poc-337511 mlflow_db_secret mlops-july-05-11pm us-east1 us-east1-b
 ./install.sh mlops-poc-337511 mlflow_db_secret mlops-july-05-11pm us-east1 us-east1-b
+   https://4469656e93fe3549-dot-us-east1.pipelines.googleusercontent.com
 ./destroy.sh mlops-poc-337511 mlops-july-05-11pm us-east1 us-east1-b
 
 ./set-env-vars.sh mlops-poc-337511 mlflow_db_secret mlops-july-05-6pm us-east1 us-east1-b
