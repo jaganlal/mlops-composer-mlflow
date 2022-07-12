@@ -149,7 +149,7 @@ if [[ $(gcloud composer environments list --locations=$REGION --filter="$COMPOSE
     --zone=$ZONE \
     --airflow-configs=core-dags_are_paused_at_creation=True \
     --disk-size=50GB \
-    --image-version=composer-1.19.2-airflow-2.2.5 \
+    --image-version=composer-1.19.2-airflow-2.1.4 \
     --machine-type=n1-standard-2 \
     --node-count=3 \
     --python-version=3 \

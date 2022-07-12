@@ -1,3 +1,28 @@
+https://1ae0e2ebaf78e03c-dot-us-east1.pipelines.googleusercontent.com
+
+./set-env-vars.sh mlops-poc-337511 mlflow_db_secret mlops-july-12-1248pm us-east1 us-east1-b
+./install.sh mlops-poc-337511 mlflow_db_secret mlops-july-12-1248pm us-east1 us-east1-b
+./destroy.sh mlops-poc-337511 mlops-july-12-1248pm us-east1 us-east1-b
+
+ERROR: (gcloud) Cannot specify --python-version with Composer 2.X or greater.
+
+Error on line: 163
+Caused by: gcloud composer environments create $COMPOSER_NAME --location=$REGION --zone=$ZONE --airflow-configs=core-dags_are_paused_at_creation=True --disk-size=50GB --image-version=composer-2.0.19-airflow-2.2.5 --machine-type=n1-standard-2 --node-count=3 --python-version=3 --enable-ip-alias
+That returned exit status: 1
+Aborting...
+Install Python packages to Cloud Composer...
+ERROR: (gcloud.composer.environments.update) NOT_FOUND: No such environment found: projects/mlops-poc-337511/locations/us-east1/environments/mlops-july-12-1156am-af
+Error on line: 163
+Caused by: gcloud composer environments update $COMPOSER_NAME --update-pypi-packages-from-file=composer-requirements.txt --location=$REGION
+That returned exit status: 1
+Aborting...
+Cloud Composer is available: mlops-july-12-1156am-af
+
+./set-env-vars.sh mlops-poc-337511 mlflow_db_secret mlops-july-12-1156am us-east1 us-east1-b
+./install.sh mlops-poc-337511 mlflow_db_secret mlops-july-12-1156am us-east1 us-east1-b
+./destroy.sh mlops-poc-337511 mlops-july-12-1156am us-east1 us-east1-b
+
+
 ERROR: Cannot install SQLAlchemy==1.4.0, apache-airflow==2.2.5 and mlflow==1.26.1 because these package versions have conflicting dependencies.
 
 The conflict is caused by:

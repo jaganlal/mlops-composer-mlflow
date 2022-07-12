@@ -28,7 +28,7 @@ COPY mlrunner.py /mltrainer/
 
 RUN apt-get update && apt-get install -y --no-install-recommends mysql-client kubectl && \
     rm -rf /var/lib/apt/lists/* && \
-    pip3 install pip install SQLAlchemy==1.3.24 pandas==1.0.4 click==7.0 PyMySQL==0.9.3 google-cloud-storage==2.4.0 mlflow==1.26.1 apache-airflow==2.2.5 PyYAML==5.3.1 cloudml-hypertune && \
+    pip3 install pip install pandas==1.0.4 click==7.0 PyMySQL==0.9.3 google-cloud-storage==2.4.0 mlflow==1.26.1 apache-airflow==2.1.4 PyYAML==5.3.1 cloudml-hypertune && \
     curl -o /usr/local/bin/cloud_sql_proxy https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 && \
     chmod +x /usr/local/bin/cloud_sql_proxy && \
     chmod +x /init.sh && \
