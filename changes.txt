@@ -1,0 +1,235 @@
+ERROR: Cannot install SQLAlchemy==1.4.0, apache-airflow==2.2.5 and mlflow==1.26.1 because these package versions have conflicting dependencies.
+
+The conflict is caused by:
+    The user requested SQLAlchemy==1.4.0
+    mlflow 1.26.1 depends on sqlalchemy
+    apache-airflow 2.2.5 depends on sqlalchemy<1.4.0 and >=1.3.18
+
+To fix this you could try to:
+1. loosen the range of package versions you've specified
+2. remove package versions to allow pip attempt to solve the dependency conflict
+
+ERROR: ResolutionImpossible: for help visit https://pip.pypa.io/en/latest/topics/dependency-resolution/#dealing-with-dependency-conflicts
+The command '/bin/sh -c apt-get update && apt-get install -y --no-install-recommends mysql-client kubectl &&     rm -rf /var/lib/apt/lists/* &&     pip3 install pip install SQLAlchemy==1.4.0 pandas==1.0.4 click==7.0 PyMySQL==0.9.3 google-cloud-storage==2.4.0 mlflow==1.26.1 apache-airflow==2.2.5 PyYAML==5.3.1 cloudml-hypertune &&     curl -o /usr/local/bin/cloud_sql_proxy https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 &&     chmod +x /usr/local/bin/cloud_sql_proxy &&     chmod +x /init.sh &&     chmod +x /entrypoint.sh' returned a non-zero code: 1
+ERROR
+ERROR: build step 0 "gcr.io/cloud-builders/docker" failed: step exited with non-zero status: 1
+
+./set-env-vars.sh mlops-poc-337511 mlflow_db_secret mlops-july-11-1124pm us-east1 us-east1-b
+./install.sh mlops-poc-337511 mlflow_db_secret mlops-july-11-1124pm us-east1 us-east1-b
+./destroy.sh mlops-poc-337511 mlops-july-11-1124pm us-east1 us-east1-b
+
+
+root@b8033b7b32aa:/home/jupyter# 2022/07/11 20:44:59 ERROR mlflow.cli: Error initializing backend store
+2022/07/11 20:44:59 ERROR mlflow.cli: No module named 'sqlalchemy.future'
+Traceback (most recent call last):
+  File "/opt/conda/lib/python3.7/site-packages/mlflow/cli.py", line 426, in server
+    initialize_backend_stores(backend_store_uri, default_artifact_root)
+  File "/opt/conda/lib/python3.7/site-packages/mlflow/server/handlers.py", line 259, in initialize_backend_stores
+    _get_tracking_store(backend_store_uri, default_artifact_root)
+  File "/opt/conda/lib/python3.7/site-packages/mlflow/server/handlers.py", line 244, in _get_tracking_store
+    _tracking_store = _tracking_store_registry.get_store(store_uri, artifact_root)
+  File "/opt/conda/lib/python3.7/site-packages/mlflow/tracking/_tracking_service/registry.py", line 39, in get_store
+    return self._get_store_with_resolved_uri(resolved_store_uri, artifact_uri)
+  File "/opt/conda/lib/python3.7/site-packages/mlflow/tracking/_tracking_service/registry.py", line 49, in _get_store_with_resolved_uri
+    return builder(store_uri=resolved_store_uri, artifact_uri=artifact_uri)
+  File "/opt/conda/lib/python3.7/site-packages/mlflow/server/handlers.py", line 110, in _get_sqlalchemy_store
+    from mlflow.store.tracking.sqlalchemy_store import SqlAlchemyStore
+  File "/opt/conda/lib/python3.7/site-packages/mlflow/store/tracking/sqlalchemy_store.py", line 11, in <module>
+    from sqlalchemy.future import select
+ModuleNotFoundError: No module named 'sqlalchemy.future'
+
+./set-env-vars.sh mlops-poc-337511 mlflow_db_secret mlops-july-11-1037am us-east1 us-east1-b
+./install.sh mlops-poc-337511 mlflow_db_secret mlops-july-11-1037am us-east1 us-east1-b
+./destroy.sh mlops-poc-337511 mlops-july-11-1037am us-east1 us-east1-b
+
+./set-env-vars.sh mlops-poc-337511 mlflow_db_secret mlops-july-11-837am us-east1 us-east1-b
+./install.sh mlops-poc-337511 mlflow_db_secret mlops-july-11-837am us-east1 us-east1-b
+./destroy.sh mlops-poc-337511 mlops-july-11-837am us-east1 us-east1-b
+
+./set-env-vars.sh mlops-poc-337511 mlflow_db_secret mlops-july-11-1232am us-east1 us-east1-b
+./install.sh mlops-poc-337511 mlflow_db_secret mlops-july-11-1232am us-east1 us-east1-b
+./destroy.sh mlops-poc-337511 mlops-july-11-1232am us-east1 us-east1-b
+
+./set-env-vars.sh mlops-poc-337511 mlflow_db_secret mlops-july-10-1114pm us-east1 us-east1-b
+./install.sh mlops-poc-337511 mlflow_db_secret mlops-july-10-1114pm us-east1 us-east1-b
+./destroy.sh mlops-poc-337511 mlops-july-10-1114pm us-east1 us-east1-b
+
+# SQLAlchemy==1.3.24
+./set-env-vars.sh mlops-poc-337511 mlflow_db_secret mlops-july-10-1051pm us-east1 us-east1-b
+./install.sh mlops-poc-337511 mlflow_db_secret mlops-july-10-1051pm us-east1 us-east1-b
+./destroy.sh mlops-poc-337511 mlops-july-10-1051pm us-east1 us-east1-b
+
+
+Does not have minimum availability	- CrashLoopBackOff
+
+./set-env-vars.sh mlops-poc-337511 mlflow_db_secret mlops-july-10-1111am us-east1 us-east1-b
+./install.sh mlops-poc-337511 mlflow_db_secret mlops-july-10-1111am us-east1 us-east1-b
+./destroy.sh mlops-poc-337511 mlops-july-10-1111am us-east1 us-east1-b
+
+./set-env-vars.sh mlops-poc-337511 mlflow_db_secret mlops-july-10-1042am us-east1 us-east1-b
+./install.sh mlops-poc-337511 mlflow_db_secret mlops-july-10-1042am us-east1 us-east1-b
+./destroy.sh mlops-poc-337511 mlops-july-10-1042am us-east1 us-east1-b
+
+ERROR: (gcloud.composer.environments.update) Error updating [projects/mlops-poc-337511/locations/us-east1/environments/mlops-july-10-1012am-af]: Operation [projects/mlops-poc-337511/locations/us-east1/operations/e9b7b2c7-d205-4440-b49e-c6a508b197bb] failed: Failed to install PyPI packages. flask-jwt-extended 3.25.1 has requirement PyJWT<2.0,>=1.6.4, but you have pyjwt 2.0.0.
+ Check the Cloud Build log at https://console.cloud.google.com/cloud-build/builds/7e9fcaea-6441-4498-b383-9f46ca6dbf92?project=557278010959 for details. For detailed instructions see https://cloud.google.com/composer/docs/troubleshooting-package-installation
+Error on line: 163
+Caused by: gcloud composer environments update $COMPOSER_NAME --update-pypi-packages-from-file=composer-requirements.txt --location=$REGION
+That returned exit status: 1
+Aborting...
+
+./set-env-vars.sh mlops-poc-337511 mlflow_db_secret mlops-july-10-1012am us-east1 us-east1-b
+./install.sh mlops-poc-337511 mlflow_db_secret mlops-july-10-1012am us-east1 us-east1-b
+./destroy.sh mlops-poc-337511 mlops-july-10-1012am us-east1 us-east1-b
+
+(gcloud.composer.environments.update) Error updating [projects/mlops-poc-337511/locations/us-east1/environments/mlops-july-10-947am-af]: Operation [projects/mlops-poc-337511/locations/us-east1/operations/2ed909b8-c87f-4b75-8dab-614462c4e4fb] failed: Failed to install PyPI packages. flask-jwt-extended 3.25.1 has requirement PyJWT<2.0,>=1.6.4, but you have pyjwt 2.0.1.
+ Check the Cloud Build log at https://console.cloud.google.com/cloud-build/builds/7e17aa56-ed2f-43de-a972-5b8c94eb7f01?project=557278010959 for details. For detailed instructions see https://cloud.google.com/composer/docs/troubleshooting-package-installation
+Error on line: 163
+Caused by: gcloud composer environments update $COMPOSER_NAME --update-pypi-packages-from-file=composer-requirements.txt --location=$REGION
+That returned exit status: 1
+
+./set-env-vars.sh mlops-poc-337511 mlflow_db_secret mlops-july-10-947am us-east1 us-east1-b
+./install.sh mlops-poc-337511 mlflow_db_secret mlops-july-10-947am us-east1 us-east1-b
+./destroy.sh mlops-poc-337511 mlops-july-10-947am us-east1 us-east1-b
+
+./set-env-vars.sh mlops-poc-337511 mlflow_db_secret mlops-july-09-1126pm us-east1 us-east1-b
+./install.sh mlops-poc-337511 mlflow_db_secret mlops-july-09-1126pm us-east1 us-east1-b
+./destroy.sh mlops-poc-337511 mlops-july-09-1126pm us-east1 us-east1-b
+
+
+./set-env-vars.sh mlops-poc-337511 mlflow_db_secret mlops-july-09-11pm us-east1 us-east1-b
+./install.sh mlops-poc-337511 mlflow_db_secret mlops-july-09-11pm us-east1 us-east1-b
+./destroy.sh mlops-poc-337511 mlops-july-09-11pm us-east1 us-east1-b
+
+
+
+Broken DAG (dags/test-sklearn-mlflow.py):
+Traceback (most recent call last):
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/home/airflow/gcs/dags/test-sklearn-mlflow.py", line 8, in <module>
+    from airflow.operators import PythonOperator
+ImportError: cannot import name 'PythonOperator' from 'airflow.operators' (/opt/python3.8/lib/python3.8/site-packages/airflow/operators/__init__.py)
+
+ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+pandas-profiling 3.2.0 requires markupsafe~=2.1.1, but you have markupsafe 2.0.1 which is incompatible.
+nbconvert 6.5.0 requires jinja2>=3.0, but you have jinja2 2.11.3 which is incompatible.
+kubernetes 24.2.0 requires pyyaml>=5.4.1, but you have pyyaml 5.3.1 which is incompatible.
+jupyterlab-server 2.14.0 requires jinja2>=3.0.3, but you have jinja2 2.11.3 which is incompatible.
+black 22.6.0 requires click>=8.0.0, but you have click 7.0 which is incompatible.
+beatrix-jupyterlab 3.1.7 requires pyjwt>=2.0.0, but you have pyjwt 1.7.1 which is incompatible.
+
+./set-env-vars.sh mlops-poc-337511 mlflow_db_secret mlops-july-09-6pm us-east1 us-east1-b
+./install.sh mlops-poc-337511 mlflow_db_secret mlops-july-09-6pm us-east1 us-east1-b
+./destroy.sh mlops-poc-337511 mlops-july-09-6pm us-east1 us-east1-b
+
+ERROR: Cannot install SQLAlchemy==1.3.24, apache-airflow==2.3.2 and mlflow==1.25.0 because these package versions have conflicting dependencies.
+
+The conflict is caused by:
+    The user requested SQLAlchemy==1.3.24
+    mlflow 1.25.0 depends on sqlalchemy
+    apache-airflow 2.3.2 depends on sqlalchemy<1.4.10 and >=1.4
+
+To fix this you could try to:
+1. loosen the range of package versions you've specified
+2. remove package versions to allow pip attempt to solve the dependency conflict
+
+ERROR: ResolutionImpossible: for help visit https://pip.pypa.io/en/latest/topics/dependency-resolution/#dealing-with-dependency-conflicts
+The command '/bin/sh -c apt-get update && apt-get install -y --no-install-recommends mysql-client kubectl &&     rm -rf /var/lib/apt/lists/* &&     pip3 install pip install SQLAlchemy==1.3.24 pandas==1.0.4 click==7.0 PyMySQL==0.9.3 google-cloud-storage==2.4.0 mlflow==1.25.0 apache-airflow==2.3.2 PyYAML==5.3.1 cloudml-hypertune &&     curl -o /usr/local/bin/cloud_sql_proxy https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 &&     chmod +x /usr/local/bin/cloud_sql_proxy &&     chmod +x /init.sh &&     chmod +x /entrypoint.sh' returned a non-zero code: 1
+ERROR
+ERROR: build step 0 "gcr.io/cloud-builders/docker" failed: step exited with non-zero status: 1
+
+./set-env-vars.sh mlops-poc-337511 mlflow_db_secret mlops-july-09-452pm us-east1 us-east1-b
+./install.sh mlops-poc-337511 mlflow_db_secret mlops-july-09-452pm us-east1 us-east1-b
+./destroy.sh mlops-poc-337511 mlops-july-09-452pm us-east1 us-east1-b
+
+ERROR: (gcloud.composer.environments.update) Error updating [projects/mlops-poc-337511/locations/us-east1/environments/mlops-july-09-247pm-af]: Operation [projects/mlops-poc-337511/locations/us-east1/operations/d5723c0a-93c6-4c92-a4cd-4ab1335267f5] failed: Failed to install PyPI packages. mlflow 1.27.0 has requirement sqlalchemy>=1.4.0, but you have sqlalchemy 1.3.24.
+ Check the Cloud Build log at https://console.cloud.google.com/cloud-build/builds/77acb27d-01ca-4fab-a144-20945938de91?project=557278010959 for details. For detailed instructions see https://cloud.google.com/composer/docs/troubleshooting-package-installation
+
+./set-env-vars.sh mlops-poc-337511 mlflow_db_secret mlops-july-09-247pm us-east1 us-east1-b
+./install.sh mlops-poc-337511 mlflow_db_secret mlops-july-09-247pm us-east1 us-east1-b
+./destroy.sh mlops-poc-337511 mlops-july-09-247pm us-east1 us-east1-b
+
+./set-env-vars.sh mlops-poc-337511 mlflow_db_secret mlops-july-09-2pm us-east1 us-east1-b
+./install.sh mlops-poc-337511 mlflow_db_secret mlops-july-09-2pm us-east1 us-east1-b
+./destroy.sh mlops-poc-337511 mlops-july-09-2pm us-east1 us-east1-b
+
+./set-env-vars.sh mlops-poc-337511 mlflow_db_secret mlops-july-09-51pm us-east1 us-east1-b
+./install.sh mlops-poc-337511 mlflow_db_secret mlops-july-09-51pm us-east1 us-east1-b
+./destroy.sh mlops-poc-337511 mlops-july-09-51pm us-east1 us-east1-b
+
+./set-env-vars.sh mlops-poc-337511 mlflow_db_secret mlops-july-09-1235pm us-east1 us-east1-b
+./install.sh mlops-poc-337511 mlflow_db_secret mlops-july-09-1235pm us-east1 us-east1-b
+./destroy.sh mlops-poc-337511 mlops-july-09-1235pm us-east1 us-east1-b
+
+./set-env-vars.sh mlops-poc-337511 mlflow_db_secret mlops-july-09-12pm us-east1 us-east1-b
+./install.sh mlops-poc-337511 mlflow_db_secret mlops-july-09-12pm us-east1 us-east1-b
+./destroy.sh mlops-poc-337511 mlops-july-09-12pm us-east1 us-east1-b
+
+<!-- Failed due to incompatible versions of composer-2.0.19-airflow-2.2.5 -->
+./set-env-vars.sh mlops-poc-337511 mlflow_db_secret mlops-july-08-5pm us-east1 us-east1-b
+./install.sh mlops-poc-337511 mlflow_db_secret mlops-july-08-5pm us-east1 us-east1-b
+./destroy.sh mlops-poc-337511 mlops-july-08-5pm us-east1 us-east1-b
+
+./set-env-vars.sh mlops-poc-337511 mlflow_db_secret mlops-july-07-3pm us-east1 us-east1-b
+./install.sh mlops-poc-337511 mlflow_db_secret mlops-july-07-3pm us-east1 us-east1-b
+   https://cc8fb569cd450d0-dot-us-east1.pipelines.googleusercontent.com
+./destroy.sh mlops-poc-337511 mlops-july-07-3pm us-east1 us-east1-b
+
+./set-env-vars.sh mlops-poc-337511 mlflow_db_secret mlops-july-07-1pm us-east1 us-east1-b
+./install.sh mlops-poc-337511 mlflow_db_secret mlops-july-07-1pm us-east1 us-east1-b
+./destroy.sh mlops-poc-337511 mlops-july-07-1pm us-east1 us-east1-b
+
+./set-env-vars.sh mlops-poc-337511 mlflow_db_secret mlops-july-05-11pm us-east1 us-east1-b
+./install.sh mlops-poc-337511 mlflow_db_secret mlops-july-05-11pm us-east1 us-east1-b
+./destroy.sh mlops-poc-337511 mlops-july-05-11pm us-east1 us-east1-b
+
+./set-env-vars.sh mlops-poc-337511 mlflow_db_secret mlops-july-05-6pm us-east1 us-east1-b
+./install.sh mlops-poc-337511 mlflow_db_secret mlops-july-05-6pm us-east1 us-east1-b
+./destroy.sh mlops-poc-337511 mlops-july-05-6pm us-east1 us-east1-b
+
+./set-env-vars.sh mlops-poc-337511 mlflow_db_secret mlops-july-05-3pm us-east1 us-east1-b
+./install.sh mlops-poc-337511 mlflow_db_secret mlops-july-05-3pm us-east1 us-east1-b
+./destroy.sh mlops-poc-337511 mlops-july-05-3pm us-east1 us-east1-b
+
+./set-env-vars.sh mlops-poc-337511 mlflow_db_secret mlops-july-05-2pm us-east1 us-east1-b
+./install.sh mlops-poc-337511 mlflow_db_secret mlops-july-05-2pm us-east1 us-east1-b
+./destroy.sh mlops-poc-337511 mlops-july-05-2pm us-east1 us-east1-b
+
+./set-env-vars.sh mlops-poc-337511 mlflow_db_secret mlops-july-05-1pm us-east1 us-east1-b
+./install.sh mlops-poc-337511 mlflow_db_secret mlops-july-05-1pm us-east1 us-east1-b
+./destroy.sh mlops-poc-337511 mlops-july-05-1pm us-east1 us-east1-b
+
+./set-env-vars.sh mlops-poc-337511 mlflow_db_secret mlops-july-05-8am us-east1 us-east1-b
+./install.sh mlops-poc-337511 mlflow_db_secret mlops-july-05-8am us-east1 us-east1-b
+./destroy.sh mlops-poc-337511 mlops-july-05-8am us-east1 us-east1-b
+
+./set-env-vars.sh mlops-poc-337511 mlflow_db_secret mlops-july-05-1am us-east1 us-east1-b
+./install.sh mlops-poc-337511 mlflow_db_secret mlops-july-05-1am us-east1 us-east1-b
+./destroy.sh mlops-poc-337511 mlops-july-05-1am us-east1 us-east1-b
+
+./set-env-vars.sh mlops-poc-337511 mlflow_db_secret mlops-july-05 us-east1 us-east1-b
+./install.sh mlops-poc-337511 mlflow_db_secret mlops-july-05 us-east1 us-east1-b
+./destroy.sh mlops-poc-337511 mlops-july-05 us-east1 us-east1-b
+
+./set-env-vars.sh mlops-poc-337511 mlflow_db_secret mlops-july-04-11pm us-east1 us-east1-b
+./install.sh mlops-poc-337511 mlflow_db_secret mlops-july-04-11pm us-east1 us-east1-b
+./destroy.sh mlops-poc-337511 mlops-july-04-11pm us-east1 us-east1-b
+
+./set-env-vars.sh mlops-poc-337511 mlflow_db_secret mlops-july-04-7pm us-east1 us-east1-b
+./install.sh mlops-poc-337511 mlflow_db_secret mlops-july-04-7pm us-east1 us-east1-b
+./destroy.sh mlops-poc-337511 mlops-july-04-7pm us-east1 us-east1-b
+
+./set-env-vars.sh mlops-poc-337511 mlflow_db_secret mlops-july-04-630pm us-east1 us-east1-b
+./install.sh mlops-poc-337511 mlflow_db_secret mlops-july-04-630pm us-east1 us-east1-b
+./destroy.sh mlops-poc-337511 mlops-july-04-630pm us-east1 us-east1-b
+
+./set-env-vars.sh mlops-poc-337511 mlflow_db_secret mlops-july-04-430pm us-east1 us-east1-b
+./install.sh mlops-poc-337511 mlflow_db_secret mlops-july-04-430pm us-east1 us-east1-b
+./destroy.sh mlops-poc-337511 mlops-july-04-430pm us-east1 us-east1-b
+
+./set-env-vars.sh mlops-poc-337511 mlflow_db_secret mlops-with-mlflow us-east1 us-east1-b
+./install.sh mlops-poc-337511 mlflow_db_secret mlops-with-mlflow us-east1 us-east1-b
+./destroy.sh mlops-poc-337511 mlops-with-mlflow us-east1 us-east1-b
+
+./set-env-vars.sh mlops-poc-337511 mlflow_db_secret gcp-with-mlflow us-east1 us-east1-b
+./install.sh mlops-poc-337511 mlflow_db_secret gcp-with-mlflow us-east1 us-east1-b
+./destroy.sh mlops-poc-337511 gcp-with-mlflow us-east1 us-east1-b

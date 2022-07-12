@@ -15,8 +15,7 @@
 FROM python:3.8.2-slim
 
 RUN pip install PyMySQL google-cloud-storage && \
-    pip install 'mlflow[extras]==1.27.0'
+    pip install 'mlflow[extras]==1.26.1'
 
-# ENTRYPOINT ["mlflow", "server"]
 EXPOSE 8080
 ENTRYPOINT [ "mlflow", "server", "--host", "0.0.0.0"]
